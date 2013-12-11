@@ -1,0 +1,16 @@
+<script id="post-template" type="text/x-handlebars-template">
+	{{#each blogPost}}
+		<article class="blog-post">
+			<h1 class="blog-post-title">{{title}}</h1>
+			<hr>
+			<div class="blog-post-info">
+				<span>By:</span> 
+				<a rel="author" href="/author/{{email}}">{{author}}</a>
+				<time>Last Edited: {{time}}</time>
+			</div>
+			<hr>
+			<p class="blog-post-text">{{post}}</p>
+			<hr>
+		</article>
+	{{/each}}
+</script>
