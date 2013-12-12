@@ -1,21 +1,11 @@
 extends layout
 
 block header
+	nav.navigation
+		a.anchor-nav(href="/admin") Add Post
+		a.anchor-nav(href="/signin") Sign-in
 	header
-		.navbar.navbar-default.navbar-fixed-top(role="navigation")
-			.container
-				.navbar-header
-					a.navbar-brand.pull-left(href="/") Blog
-				ul.nav.navbar-nav.navbar-right.pull-right
-					li.dropdown
-						a.dropdown-toggle(href="/admin", data-toggle="dropdown")<b class="caret"></b></a>
-						ul.dropdown-menu
-							li Someting
-							li something else
-							li another thing
-							li.divider
-							li <a href="/logout">Sign Out</a>
-		.container
+		.container#head
 			h1 Title
 			p.lead Welcome to my blog
 

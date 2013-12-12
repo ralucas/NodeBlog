@@ -1,8 +1,49 @@
 body {
-  padding: 50px;
+  /*padding: 50px;*/
+  /*padding-top: 5px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+/*navigation bar*/
+
+nav {
+	background-color: black;
+	position: fixed;
+	width: 100%;
+}
+
+.anchor-nav{
+	color: white;
+	padding: 2%;
+}
+
+/*header*/
+
+header {
+	text-align: center;
+	background-color: rgba(0,0,0,.2);
+	height: 200px;
+}
+
+.posts {
+	width: 50%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+time {
+	float: right;
+}
+
+.ico-delete {
+	float: right;
+}
+
+.ico-delete:hover {
+	cursor: pointer;
+	color:red;
 }

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 
 //connect MongoDb to Mongoose
 var localMongo = 'mongodb://localhost';
@@ -8,7 +9,7 @@ mongoose.connect(MongoUrl);
 //setup db for blog posts
 var blogPostSchema = new mongoose.Schema({
 	author: String,
-	time: {type: Date, default: Date.now},
+	time: {type: Object, default: moment().format('MMMM Do YYYY, h:mm:ss a')},
 	title: String,
 	post: String,
 	comments: [{ body: String, date: Date }]
@@ -34,6 +35,7 @@ exports.renderPost = function(req, res){
 	BlogPost.find(function (err, blogPost){
 		if(err){console.error('ERROR');}
 		else{
+			blogPost.reverse();
 			res.send(blogPost);
 		}
 	});

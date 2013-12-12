@@ -1,16 +1,28 @@
 <script id="post-template" type="text/x-handlebars-template">
 	{{#each blogPost}}
-		<article class="blog-post">
-			<h1 class="blog-post-title">{{title}}</h1>
-			<hr>
+		<article class="blog-post" data-id={{_id}}>
+			<div class="tooltip">
+				<div class="tooltip-inner">Tooltip!</div>
+				<div class="tooltip-arrow"></div>
+			</div>
+			<h1 class="blog-post-title">{{title}}<i class="glyphicon glyphicon-remove-circle ico-delete" data-toggle="tooltip" title="Delete Post"></i></h1>
 			<div class="blog-post-info">
 				<span>By:</span> 
-				<a rel="author" href="/author/{{email}}">{{author}}</a>
+				<a rel="author" href="/author/{{author}}">{{author}}</a>
 				<time>Last Edited: {{time}}</time>
 			</div>
 			<hr>
 			<p class="blog-post-text">{{post}}</p>
+			<p><a href="#">Add Comment</a></p>
 			<hr>
+			{{#if commentPost}}
+				<p class="lead">Comments</p>
+				<p>{{comment}}</p>
+				<div class="comment-info">
+					<span>By: {{commentAuthor}}</span> 
+					<time>Time: {{time}}</time>
+				</div>
+			{{/if}}
 		</article>
 	{{/each}}
 </script>
