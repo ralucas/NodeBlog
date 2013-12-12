@@ -40,3 +40,13 @@ exports.renderPost = function(req, res){
 		}
 	});
 };
+
+exports.deletePost = function(req, res){
+	var toDelete = req.body;
+	BlogPost.findByIdAndRemove(toDelete._id, function(err, id){
+		if(err){console.error('ERROR');}
+		else{
+			res.send({success:'deleted'});
+		}
+	});
+};

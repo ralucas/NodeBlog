@@ -13,7 +13,16 @@
 			</div>
 			<hr>
 			<p class="blog-post-text">{{post}}</p>
-			<p><a href="#">Add Comment</a></p>
+			<button class="btn btn-xs btn-primary btn-addComment">Add Comment</button>
+			<div class="hidden comment-box">
+				<form role="form">
+					<label for="commentName">Name: </label>
+					<input name="commentName" type="text" placeholder="Enter Name" />
+					<label for="commentText">Comment: </label>
+					<textarea></textarea>
+					<button class="btn btn-xs btn-default btn-submitComment" type='submit'>Submit Comment</button>
+				</form>
+			</div>
 			<hr>
 			{{#if commentPost}}
 				<p class="lead">Comments</p>
