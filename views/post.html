@@ -5,7 +5,8 @@
 				<div class="tooltip-inner">Tooltip!</div>
 				<div class="tooltip-arrow"></div>
 			</div>
-			<h1 class="blog-post-title">{{title}}<i class="glyphicon glyphicon-remove-circle ico-delete" data-toggle="tooltip" title="Delete Post"></i></h1>
+			<i class="glyphicon glyphicon-remove-circle ico-delete pull-right" data-toggle="tooltip" title="Delete Post"></i>
+			<h1 class="blog-post-title">{{title}}</h1>
 			<div class="blog-post-info">
 				<span>By:</span> 
 				<a rel="author" href="/author/{{author}}">{{author}}</a>
@@ -15,22 +16,34 @@
 			<p class="blog-post-text">{{post}}</p>
 			<button class="btn btn-xs btn-primary btn-addComment">Add Comment</button>
 			<div class="hidden comment-box">
-				<form role="form">
-					<label for="commentName">Name: </label>
-					<input name="commentName" type="text" placeholder="Enter Name" />
-					<label for="commentText">Comment: </label>
-					<textarea></textarea>
-					<button class="btn btn-xs btn-default btn-submitComment" type='submit'>Submit Comment</button>
+				<hr>
+				<form role="form" class="comment-form">
+					<input type="hidden" value={{_id}} name="_id" />
+					<div class="form-group">
+						<label for="commentName">Name: </label>
+						<input class="form-control" name="commentName" type="text" placeholder="Enter Name" />
+					</div>
+					<div class="form-group">
+						<label for="commentText">Comment: </label>
+						<textarea class="form-control" cols=3 rows=3 name="commentText" placeholder="Enter Comment..."></textarea>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-xs btn-default btn-submitComment" type='submit'>Submit Comment</button>
+					</div>
 				</form>
+				<hr>
 			</div>
 			<hr>
-			{{#if commentPost}}
+			{{#if comments}}
 				<p class="lead">Comments</p>
-				<p>{{comment}}</p>
-				<div class="comment-info">
-					<span>By: {{commentAuthor}}</span> 
-					<time>Time: {{time}}</time>
-				</div>
+				{{#each comments}}
+					<div class="comment-info">
+						<span>By: {{name}}</span> 
+						<time>Time: {{time}}</time>
+					</div>
+					<p>{{body}}</p>
+					<hr>
+				{{/each}}
 			{{/if}}
 		</article>
 	{{/each}}

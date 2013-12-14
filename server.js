@@ -36,6 +36,7 @@ app.get('/admin', routes.admin);
 app.post('/blog-post', post.getNewPost);
 app.get('/render-post', post.renderPost);
 app.post('/delete-post', post.deletePost);
+app.post('/add-comment', post.getNewComment);
 
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

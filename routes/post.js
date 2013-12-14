@@ -12,7 +12,11 @@ var blogPostSchema = new mongoose.Schema({
 	time: {type: Object, default: moment().format('MMMM Do YYYY, h:mm:ss a')},
 	title: String,
 	post: String,
-	comments: [{ body: String, date: Date }]
+	comments: [{
+		name: String,
+		body: String,
+		time: {type: Object, default: moment().format('MMMM Do YYYY, h:mm:ss a')}
+	}]
 });
 
 var BlogPost = mongoose.model('BlogPost', blogPostSchema);
@@ -28,7 +32,6 @@ exports.getNewPost = function (req,res){
 		post : post
 	});
 	blogPost.save();
-	console.log(blogPost);
 };
 
 exports.renderPost = function(req, res){
@@ -50,3 +53,31 @@ exports.deletePost = function(req, res){
 		}
 	});
 };
+
+exports.getNewComment = function(req, res){
+	var commentData = req.body;
+	var newCommentObj = {
+		name : commentData.commentName,
+		body : commentData.commentText
+	};
+	BlogPost.findById(commentData._id, function(err, blogPost){
+		if(err){console.error('ERROR');}
+		else{
+			blogPost.comments.push(newCommentObj);
+			blogPost.save();
+			res.send({success:'success'});
+		}
+	});
+};
+
+// BlogPost.findByIdAndUpdate(commentData._id,
+// 		{comments: [newCommentObj]}, function(err, blogPost){
+// 		if(err){console.error('ERROR');}
+// 		else{
+// 			console.log('cd', commentData);
+// 			blogPost.save();
+// 			console.log('bp', blogPost);
+// 			res.send({success:'success'});
+// 		}
+// 	});
+

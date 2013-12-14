@@ -29,6 +29,8 @@ header {
 	height: 200px;
 }
 
+/*posts*/
+
 .posts {
 	width: 50%;
 	margin-right: auto;
@@ -46,4 +48,10 @@ time {
 .ico-delete:hover {
 	cursor: pointer;
 	color:red;
+}
+
+/*admin blog post entry*/
+
+.blog-post-form-header {
+	text-align: center;
 }
