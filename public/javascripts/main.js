@@ -1,3 +1,18 @@
+//utility functions
+
+//validate form fields for text from serialized array
+var validateForText = function(arr) {
+	for(var i = 0; i < arr.length; i++){
+		if(!arr[i]['value']){
+			alert('Please enter '+arr[i]['name']);
+			return false;
+		}
+	}
+	return true;
+};
+
+
+
 $(function(){
 	
 	////
@@ -8,13 +23,20 @@ $(function(){
 	$("#blog-post-form").on('submit', function(e){
 		e.preventDefault();
 		var blogPostData = $(this).serialize();
-		$(this).find('input').val('');
-		$(this).find('textarea').val('');
-		$(this).find('.alert-success').removeClass('hidden').fadeIn();
-		//ajax post blog-post data to server
-		$.post('/blog-post', blogPostData, function(data){
-			console.log(data);
-		});
+		var blogPostArray  = $(this).serializeArray();
+
+		var formIsFilled = validateForText(blogPostArray);
+
+		if(formIsFilled) {
+			$(this).find('input').val('');
+			$(this).find('textarea').val('');
+			$(this).find('.alert-success').removeClass('hidden').fadeIn();
+
+			//ajax post blog-post data to server
+			$.post('/blog-post', blogPostData, function(data){
+				console.log(data);
+			});
+		}
 	});
 
 	//render new blog posts on '/' home page
@@ -60,16 +82,22 @@ $(function(){
 	//submit the comment and hide the comment box
 	$(document).on('submit', '.comment-form', function(e){
 		e.preventDefault();
-		var commentData = $(this).serialize();
-		console.log(commentData);
 		var $that = $(this);
-		//ajax post sending which id to add comment to
-		//then adds comment to post-comment-area
-		$.post('/add-comment', commentData, function(data){
-			if(data['success']){
-				$that.closest('.comment-box').addClass('hidden');
-				$that.closest('.comment-box').prev().removeClass('hidden');
-			}
-		});
+		var commentData = $(this).serialize();
+		var commentDataArray = $(this).serializeArray();
+
+		var formIsFilled = validateForText(commentDataArray);
+
+		if(formIsFilled){
+		
+			//ajax post sending which id to add comment to
+			//then adds comment to post-comment-area
+			$.post('/add-comment', commentData, function(data){
+				if(data['success']){
+					$that.closest('.comment-box').addClass('hidden');
+					$that.closest('.comment-box').prev().removeClass('hidden');
+				}
+			});
+		}
 	});
 });
