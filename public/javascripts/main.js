@@ -8,6 +8,9 @@ $(function(){
 	$("#blog-post-form").on('submit', function(e){
 		e.preventDefault();
 		var blogPostData = $(this).serialize();
+		$(this).find('input').val('');
+		$(this).find('textarea').val('');
+		$(this).find('.alert-success').removeClass('hidden').fadeIn();
 		//ajax post blog-post data to server
 		$.post('/blog-post', blogPostData, function(data){
 			console.log(data);
