@@ -70,6 +70,16 @@ exports.getNewComment = function(req, res){
 	});
 };
 
+exports.getAuthorPosts = function(req, res){
+	var authorName = req.params.authorName;
+	BlogPost.find({author : authorName}, function(err, blogPost){
+		if(err){console.error('ERROR');}
+		else{
+			res.send(blogPost);
+		}
+	});
+};
+
 // BlogPost.findByIdAndUpdate(commentData._id,
 // 		{comments: [newCommentObj]}, function(err, blogPost){
 // 		if(err){console.error('ERROR');}
