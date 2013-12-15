@@ -11,6 +11,20 @@ var validateForText = function(arr) {
 	return true;
 };
 
+var escape = function(str){
+	var reBeg = new RegExp("%3C", "gim");
+	var reEnd = new RegExp("%3E", "gim");
+	if(str.match(reBeg) || str.match(reEnd)){
+		return true;
+	}
+};
+
+var parseText = function(str){
+	var re = new RegExp("%0D%0A", "gim");
+	var text = str.replace(re, "<br>");
+	console.log('text', text);
+	return text;
+};
 
 
 $(function(){
@@ -24,16 +38,26 @@ $(function(){
 		e.preventDefault();
 		var blogPostData = $(this).serialize();
 		var blogPostArray  = $(this).serializeArray();
+		console.log(blogPostData);
+		console.log(blogPostArray);
+
+		var escText = escape(blogPostData);
+
+		if(escText){
+			alert('No HTML Tags Please!  Thank you.');
+		}
+
+		var entry = parseText(blogPostData);
 
 		var formIsFilled = validateForText(blogPostArray);
 
-		if(formIsFilled) {
+		if(formIsFilled && !escText) {
 			$(this).find('input').val('');
 			$(this).find('textarea').val('');
 			$(this).find('.alert-success').removeClass('hidden').fadeIn();
 
 			//ajax post blog-post data to server
-			$.post('/blog-post', blogPostData, function(data){
+			$.post('/blog-post', entry, function(data){
 				console.log(data);
 			});
 		}
