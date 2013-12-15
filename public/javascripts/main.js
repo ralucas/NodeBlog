@@ -22,9 +22,10 @@ var escape = function(str){
 var parseText = function(str){
 	var re = new RegExp("%0D%0A", "gim");
 	var text = str.replace(re, "<br>");
-	console.log('text', text);
 	return text;
 };
+
+Handlebars.registerPartial("comments", $("#comment-partial").html());
 
 
 $(function(){
@@ -38,24 +39,19 @@ $(function(){
 		e.preventDefault();
 		var blogPostData = $(this).serialize();
 		var blogPostArray  = $(this).serializeArray();
-		console.log(blogPostData);
-		console.log(blogPostArray);
-
+		//escaping html tags
 		var escText = escape(blogPostData);
-
 		if(escText){
 			alert('No HTML Tags Please!  Thank you.');
 		}
-
+		//adding any linebreaks
 		var entry = parseText(blogPostData);
-
+		//making sure the form is filled
 		var formIsFilled = validateForText(blogPostArray);
-
 		if(formIsFilled && !escText) {
 			$(this).find('input').val('');
 			$(this).find('textarea').val('');
 			$(this).find('.alert-success').removeClass('hidden').fadeIn();
-
 			//ajax post blog-post data to server
 			$.post('/blog-post', entry, function(data){
 				console.log(data);
@@ -63,7 +59,9 @@ $(function(){
 		}
 	});
 
+	////
 	//render new blog posts on '/' home page
+	////
 	$.get('/render-post', function(data){
 		//Handlebars
 		var source = $("#post-template").html();
@@ -106,6 +104,7 @@ $(function(){
 	//submit the comment and hide the comment box
 	$(document).on('submit', '.comment-form', function(e){
 		e.preventDefault();
+	
 		var $that = $(this);
 		var commentData = $(this).serialize();
 		var commentDataArray = $(this).serializeArray();
@@ -113,15 +112,31 @@ $(function(){
 		var formIsFilled = validateForText(commentDataArray);
 
 		if(formIsFilled){
-		
+			$(this).find('input').val('');
+			$(this).find('textarea').val('');
 			//ajax post sending which id to add comment to
 			//then adds comment to post-comment-area
 			$.post('/add-comment', commentData, function(data){
-				if(data['success']){
-					$that.closest('.comment-box').addClass('hidden');
+				if(data){
+					$that.closest('.comment-box').fadeOut('slow');
 					$that.closest('.comment-box').prev().removeClass('hidden');
+					var source = $("#post-template").html();
+					var template = Handlebars.compile(source);
+					$('.posts').html(template({blogPost : data}));
+
+					//console.log(data);
+					//var source = $("#comment-partial").html();
+					//console.log('src', source);
+					//var template = Handlebars.compile(source);
+					//var compiled = template({blogPost : data});
+					//console.log('comp', compiled);
+					//$('.comments').html(template({blogPost : data}));
+					
+
+
 				}
 			});
 		}
 	});
+
 });

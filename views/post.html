@@ -34,17 +34,22 @@
 				<hr>
 			</div>
 			<hr>
-			{{#if comments}}
-				<p class="lead">Comments</p>
-				{{#each comments}}
-					<div class="comment-info">
-						<span>By: {{name}}</span> 
-						<time>Time: {{time}}</time>
-					</div>
-					<p>{{body}}</p>
-					<hr>
-				{{/each}}
-			{{/if}}
+			<div class="comments">
+				{{> comments}}
+			</div>
 		</article>
 	{{/each}}
+</script>
+<script id="comment-partial" type="text/x-handlebars-template">
+	{{#if comments}}
+		<p class="lead">Comments</p>
+			{{#each comments}}
+				<div class="comment-info">
+					<span>By: {{name}}</span> 
+					<time>Time: {{time}}</time>
+				</div>
+				<p>{{body}}</p>
+				<hr>
+			{{/each}}
+	{{/if}}
 </script>

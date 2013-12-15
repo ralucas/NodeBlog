@@ -63,11 +63,24 @@ exports.getNewComment = function(req, res){
 	BlogPost.findById(commentData._id, function(err, blogPost){
 		if(err){console.error('ERROR');}
 		else{
-			blogPost.comments.push(newCommentObj);
+			blogPost.comments.unshift(newCommentObj);
+			//blogPost.comments.reverse();
 			blogPost.save();
-			res.send({success:'success'});
+			//res.send(blogPost);
+			setTimeout(function(){
+				BlogPost.find(function(err, updPosts){
+					if(err){console.error('ERROR');}
+					else{
+						console.log(updPosts);
+						updPosts.reverse();
+						//console.log(updPosts);
+						res.send(updPosts);
+					}
+				})
+			},100);
 		}
 	});
+
 };
 
 exports.getAuthorPosts = function(req, res){
