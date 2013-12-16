@@ -18,7 +18,8 @@ a {
 	margin-top: 25px;
 	margin-bottom: 0;
 	border-radius: 0;
-
+	bottom: 0px;
+	width: 100%;
 }
 
 /*posts*/
@@ -27,7 +28,13 @@ a {
 	width: 50%;
 	margin-right: auto;
 	margin-left: auto;
+	border-radius: 5px;
 	box-shadow: 0px 20px 15px 8px #888888;
+}
+
+.no-blog {
+	text-align: center;
+	min-height: 500px;
 }
 
 time {
@@ -48,10 +55,6 @@ time {
 .blog-post-form-header {
 	text-align: center;
 }
-
-/*#blog-post-form {
-	width: 66.7%;
-}*/
 
 .form-container {
 	box-shadow: 0px 10px 15px 8px #888888;

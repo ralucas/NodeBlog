@@ -1,25 +1,5 @@
-var mongoose = require('mongoose');
 var moment = require('moment');
-
-//connect MongoDb to Mongoose
-var localMongo = 'mongodb://localhost';
-var MongoUrl = process.env.MONGOHQ_URL ? process.env.MONGOHQ_URL : localMongo;
-mongoose.connect(MongoUrl);
-
-//setup db for blog posts
-var blogPostSchema = new mongoose.Schema({
-	author: String,
-	time: {type: Object, default: moment().zone(420).format('MMMM Do YYYY, h:mm:ss a')},
-	title: String,
-	post: String,
-	comments: [{
-		name: String,
-		body: String,
-		time: {type: Object, default: moment().zone(420).format('MMMM Do YYYY, h:mm:ss a')}
-	}]
-});
-
-var BlogPost = mongoose.model('BlogPost', blogPostSchema);
+var BlogPost = require('./../models/blog-model');
 
 //functions
 exports.getNewPost = function (req,res){
@@ -28,6 +8,7 @@ exports.getNewPost = function (req,res){
 	var post = req.body.blogPostText;
 	var blogPost = new BlogPost({
 		author : author,
+		time : moment().zone(420).format('MMMM Do YYYY, h:mm:ss a'),
 		title : title,
 		post : post
 	});
@@ -35,10 +16,9 @@ exports.getNewPost = function (req,res){
 };
 
 exports.renderPost = function(req, res){
-	BlogPost.find(function (err, blogPost){
+	BlogPost.find({}, null, { sort: {time:'desc'}}, function (err, blogPost){
 		if(err){console.error('ERROR');}
 		else{
-			blogPost.reverse();
 			res.send(blogPost);
 		}
 	});
@@ -58,7 +38,8 @@ exports.getNewComment = function(req, res){
 	var commentData = req.body;
 	var newCommentObj = {
 		name : commentData.commentName,
-		body : commentData.commentText
+		body : commentData.commentText,
+		time : moment().zone(420).format('MMMM Do YYYY, h:mm:ss a')
 	};
 	BlogPost.findById(commentData._id, function(err, blogPost){
 		if(err){console.error('ERROR');}
@@ -66,10 +47,9 @@ exports.getNewComment = function(req, res){
 			blogPost.comments.unshift(newCommentObj);
 			blogPost.save();
 			setTimeout(function(){
-				BlogPost.find(function(err, updPosts){
+				BlogPost.find({}, null, { sort: {time:'desc'}}, function(err, updPosts){
 					if(err){console.error('ERROR');}
 					else{
-						updPosts.reverse();
 						res.send(updPosts);
 					}
 				})

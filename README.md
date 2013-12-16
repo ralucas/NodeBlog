@@ -10,10 +10,11 @@ Find the blog here: http://infinite-plateau-3641.herokuapp.com/
 3. Any user can add a comment to any post.
 4. Any user can delete any post.
 
-#####Uses the following:
-* Express framework
-* Handlebars.js
+######Uses the following:
 * jQuery
+* Express framework for Node.js
+* Handlebars.js
+* MongoDB with Mongoose
 
 Screenshot
 -----------

@@ -1,4 +1,10 @@
 <script id="post-template" type="text/x-handlebars-template">
+	{{#unless blogPost}}
+		<div class="no-blog">
+			<h1>Please enter a blog post</h1>
+			<h2><a href='/admin'>Click here</a></h2>
+		</div>
+	{{/unless}}
 	{{#each blogPost}}
 		<article class="blog-post" data-id={{_id}}>
 			<div class="tooltip">
