@@ -1,6 +1,8 @@
 No_deBlog
 ==========
 
+Find the blog here: http://infinite-plateau-3641.herokuapp.com/
+
 ######A Blog in Node.js
 
 1. Any user can view all the posts on the home page.
@@ -8,18 +10,11 @@ No_deBlog
 3. Any user can add a comment to any post.
 4. Any user can delete any post.
 
-To-do plan
+#####Uses the following:
+* Express framework
+* Handlebars.js
+* jQuery
+
+Screenshot
 -----------
-1. Back-end with sign-in
-	* both social login and local using passport
-		* use login as name for post
-	* parser for title and text input
-		* potentially look at a markdown parser
-1. Front-end shows:
-	* Posts
-		* Shows name, date created, and date last edited
-	* Header and Footer
-		* editable on the back-end
-	* Ability to add comments
-		* one-click
-	* Delete or X to delete posts
+![Full](/public/img/Screenshot_nodeblog.png)
