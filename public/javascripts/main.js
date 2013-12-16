@@ -93,7 +93,7 @@ $(function(){
 		if(formIsFilled){
 			$(this).find('input').val('');
 			$(this).find('textarea').val('');
-			$that.closest('.comment-box').fadeOut('slow');
+			$that.closest('.comment-box').addClass('hidden');
 			$that.closest('.comment-box').prev().removeClass('hidden');
 			//ajax post sending which id to add comment to
 			//then adds comment to post-comment-area
