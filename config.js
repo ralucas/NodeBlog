@@ -1,10 +1,12 @@
 var config = {
 	production : {
-		MongoUrl : process.env.MONGOHQ_URL
+		MongoUrl : process.env.MONGOHQ_URL,
+		title : 'No_deBlog'
 	},
 
 	development : {
-		MongoUrl : 'http://localhost'
+		MongoUrl : 'http://localhost',
+		title : 'No_deBlog'
 	}
 };
 
