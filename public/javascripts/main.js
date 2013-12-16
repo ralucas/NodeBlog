@@ -1,32 +1,5 @@
-//utility functions
-
-//validate form fields for text from serialized array
-var validateForText = function(arr) {
-	for(var i = 0; i < arr.length; i++){
-		if(!arr[i]['value']){
-			alert('Please enter '+arr[i]['name']);
-			return false;
-		}
-	}
-	return true;
-};
-
-var escape = function(str){
-	var reBeg = new RegExp("%3C", "gim");
-	var reEnd = new RegExp("%3E", "gim");
-	if(str.match(reBeg) || str.match(reEnd)){
-		return true;
-	}
-};
-
-var parseText = function(str){
-	var re = new RegExp("%0D%0A", "gim");
-	var text = str.replace(re, "<br>");
-	return text;
-};
-
+//register comments partial for handlebars
 Handlebars.registerPartial("comments", $("#comment-partial").html());
-
 
 $(function(){
 	
@@ -62,6 +35,7 @@ $(function(){
 	////
 	//render new blog posts on '/' home page
 	////
+
 	$.get('/render-post', function(data){
 		//Handlebars
 		var source = $("#post-template").html();
@@ -120,23 +94,27 @@ $(function(){
 				if(data){
 					$that.closest('.comment-box').fadeOut('slow');
 					$that.closest('.comment-box').prev().removeClass('hidden');
+					//Handlebars
 					var source = $("#post-template").html();
 					var template = Handlebars.compile(source);
 					$('.posts').html(template({blogPost : data}));
+					}
+				});
+			}
+		});
 
-					//console.log(data);
-					//var source = $("#comment-partial").html();
-					//console.log('src', source);
-					//var template = Handlebars.compile(source);
-					//var compiled = template({blogPost : data});
-					//console.log('comp', compiled);
-					//$('.comments').html(template({blogPost : data}));
-					
-
-
-				}
+		////
+		//render author pages
+		////
+		$(document).on('click', '.author-link', function(e){
+			e.preventDefault();
+			authorUrl = $('a', this).attr('href');
+			$.get(authorUrl, function(data){
+				console.log(data);
+				var source = $("#post-template").html();
+				var template = Handlebars.compile(source);
+				$('.posts').html(template({blogPost : data}));
 			});
-		}
-	});
-
+		});
+		
 });

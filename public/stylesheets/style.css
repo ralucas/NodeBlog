@@ -1,32 +1,24 @@
-body {
-  /*padding: 50px;*/
-  /*padding-top: 5px;*/
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00B7FF;
 }
 
-/*navigation bar*/
-
-nav {
-	background-color: black;
-	position: fixed;
-	width: 100%;
-}
-
-.anchor-nav{
-	color: white;
-	padding: 2%;
-}
-
 /*header*/
 
-header {
+#head {
 	text-align: center;
-	background-color: rgba(0,0,0,.05);
-	height: 200px;
+}
+
+.jumbotron {
+	box-shadow: 0px 10px 10px 5px #888;
+}
+
+/*footer*/
+
+.footer-bar {
+	margin-top: 25px;
+	margin-bottom: 0;
+	border-radius: 0;
+
 }
 
 /*posts*/
@@ -35,6 +27,7 @@ header {
 	width: 50%;
 	margin-right: auto;
 	margin-left: auto;
+	box-shadow: 0px 20px 15px 8px #888888;
 }
 
 time {
@@ -54,4 +47,12 @@ time {
 
 .blog-post-form-header {
 	text-align: center;
+}
+
+/*#blog-post-form {
+	width: 66.7%;
+}*/
+
+.form-container {
+	box-shadow: 0px 10px 15px 8px #888888;
 }
