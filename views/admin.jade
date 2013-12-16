@@ -8,11 +8,11 @@ block content
 				label(for="author") Author:
 				input.form-control(type="text" placeholder="Your Name" name="author")
 			.form-group	
-				label(for="blogPostTitle") Title:
-				input.form-control(type="text" placeholder="Blog Post Title" name="blogPostTitle")
+				label(for="title") Title:
+				input.form-control(type="text" placeholder="Blog Post Title" name="title" data-name="title")
 			.form-group
-				label(for="blogPostText") Post:
-				textarea.form-control(rows="20" placeholder="Enter your blog post here" name="blogPostText")
+				label(for="post") Post:
+				textarea.form-control(rows="20" placeholder="Enter your blog post here" name="post")
 			.form-group
 				button.btn.btn-primary.btn-lg.pull-right#btn-publish(type="submit") Publish Post
 			.alert.alert-success.hidden#publish-success Your post has been published   

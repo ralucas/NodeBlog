@@ -12,6 +12,7 @@ $(function(){
 		e.preventDefault();
 		var blogPostData = $(this).serialize();
 		var blogPostArray  = $(this).serializeArray();
+		console.log(blogPostArray);
 		//escaping html tags
 		var escText = escape(blogPostData);
 		if(escText){
@@ -73,6 +74,13 @@ $(function(){
 	$(document).on('click', '.btn-addComment', function(){
 		$(this).addClass('hidden');
 		$(this).next('.comment-box').removeClass('hidden');
+	});
+
+	//cancel comment
+	$(document).on('click', '.btn-cancelComment', function(e){
+		e.preventDefault();
+		$(this).closest('.comment-box').addClass('hidden');
+		$(this).closest('.comment-box').prev().removeClass('hidden');
 	});
 
 	//submit the comment and hide the comment box

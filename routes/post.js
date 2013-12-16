@@ -4,8 +4,8 @@ var BlogPost = require('./../models/blog-model');
 //functions
 exports.getNewPost = function (req,res){
 	var author = req.body.author;
-	var title = req.body.blogPostTitle;
-	var post = req.body.blogPostText;
+	var title = req.body.title;
+	var post = req.body.post;
 	var blogPost = new BlogPost({
 		author : author,
 		time : moment().zone(420).format('MMMM Do YYYY, h:mm:ss a'),
@@ -37,8 +37,8 @@ exports.deletePost = function(req, res){
 exports.getNewComment = function(req, res){
 	var commentData = req.body;
 	var newCommentObj = {
-		name : commentData.commentName,
-		body : commentData.commentText,
+		name : commentData.name,
+		body : commentData.comment,
 		time : moment().zone(420).format('MMMM Do YYYY, h:mm:ss a')
 	};
 	BlogPost.findById(commentData._id, function(err, blogPost){
