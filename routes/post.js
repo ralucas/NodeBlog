@@ -9,13 +9,13 @@ mongoose.connect(MongoUrl);
 //setup db for blog posts
 var blogPostSchema = new mongoose.Schema({
 	author: String,
-	time: {type: Object, default: moment().format('MMMM Do YYYY, h:mm:ss a')},
+	time: {type: Object, default: moment().zone(420).format('MMMM Do YYYY, h:mm:ss a')},
 	title: String,
 	post: String,
 	comments: [{
 		name: String,
 		body: String,
-		time: {type: Object, default: moment().format('MMMM Do YYYY, h:mm:ss a')}
+		time: {type: Object, default: moment().zone(420).format('MMMM Do YYYY, h:mm:ss a')}
 	}]
 });
 
