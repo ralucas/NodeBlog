@@ -1,7 +1,7 @@
-No_deBlog
+NodeBlog
 ==========
 
-Find the blog here: http://infinite-plateau-3641.herokuapp.com/
+Find the blog here:
 
 ######A Blog in Node.js
 
@@ -13,6 +13,7 @@ Find the blog here: http://infinite-plateau-3641.herokuapp.com/
 ######Uses the following:
 * jQuery
 * Express framework for Node.js
+* Templating all in Jade
 * Handlebars.js
 * MongoDB with Mongoose
 
