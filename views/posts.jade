@@ -1,0 +1,32 @@
+extends header
+
+block content
+	.container.post
+		article.blog-post(data-id='#{_id}')
+			.tooltip
+				.tooltip-inner Tooltip!
+				.tooltip-arrow
+			i.glyphicon.glyphicon-remove-circle.ico-delete.pull-right(data-toggle="tooltip" title="Delete Post")
+			h1.blog-post-title #{title}
+			.blog-post-info
+				span.author-link By: <a rel="author" href="/author/#{author}">#{author}</a>
+				time Last Edited: #{time}
+			hr
+			p.blog-post-text!= post
+			button.btn.btn-xs.btn-primary.btn-addComment Add Comment
+			.hidden.comment-box
+				hr
+				form.comment-form(role="form")
+					input(type="hidden", value="#{_id}", name="_id")
+					.form-group
+						label(for="name") Name: 
+						input.form-control(name="name" type="text" placeholder="Enter Name")
+					.form-group
+						label(for="comment") Comment: 
+						textarea.form-control(cols=3, rows=3, name="comment", placeholder="Enter Comment")
+					.form-group
+						button.btn.btn-xs.btn-default.btn-submitComment(type='submit') Submit Comment
+						button.btn.btn-xs.btn-warning.btn-cancelComment.pull-right Cancel
+				hr
+			hr
+			include comments

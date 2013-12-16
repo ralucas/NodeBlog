@@ -12,7 +12,7 @@
 				<div class="tooltip-arrow"></div>
 			</div>
 			<i class="glyphicon glyphicon-remove-circle ico-delete pull-right" data-toggle="tooltip" title="Delete Post"></i>
-			<h1 class="blog-post-title">{{title}}</h1>
+			<h1 class="blog-post-title"><a href="/posts/{{_id}}">{{title}}</a></h1>
 			<div class="blog-post-info">
 				<span class='author-link'>By: 
 				<a rel="author" href="/author/{{author}}">{{author}}</a>
@@ -21,43 +21,7 @@
 			</div>
 			<hr>
 			<p class="blog-post-text">{{{post}}}</p>
-			<button class="btn btn-xs btn-primary btn-addComment">Add Comment</button>
-			<div class="hidden comment-box">
-				<hr>
-				<form role="form" class="comment-form">
-					<input type="hidden" value={{_id}} name="_id" />
-					<div class="form-group">
-						<label for="name">Name: </label>
-						<input class="form-control" name="name" type="text" placeholder="Enter Name" />
-					</div>
-					<div class="form-group">
-						<label for="comment">Comment: </label>
-						<textarea class="form-control" cols=3 rows=3 name="comment" placeholder="Enter Comment..."></textarea>
-					</div>
-					<div class="form-group">
-						<button class="btn btn-xs btn-default btn-submitComment" type='submit'>Submit Comment</button>
-						<button class="btn btn-xs btn-warning btn-cancelComment pull-right">Cancel</button>
-					</div>
-				</form>
-				<hr>
-			</div>
 			<hr>
-			<div class="comments">
-				{{> comments}}
-			</div>
 		</article>
 	{{/each}}
-</script>
-<script id="comment-partial" type="text/x-handlebars-template">
-	{{#if comments}}
-		<p class="lead">Comments</p>
-			{{#each comments}}
-				<div class="comment-info">
-					<span>By: {{name}}</span> 
-					<time>Time: {{time}}</time>
-				</div>
-				<p>{{body}}</p>
-				<hr>
-			{{/each}}
-	{{/if}}
 </script>

@@ -1,6 +1,3 @@
-//register comments partial for handlebars
-Handlebars.registerPartial("comments", $("#comment-partial").html());
-
 $(function(){
 	
 	////
@@ -96,33 +93,12 @@ $(function(){
 		if(formIsFilled){
 			$(this).find('input').val('');
 			$(this).find('textarea').val('');
+			$that.closest('.comment-box').fadeOut('slow');
+			$that.closest('.comment-box').prev().removeClass('hidden');
 			//ajax post sending which id to add comment to
 			//then adds comment to post-comment-area
-			$.post('/add-comment', commentData, function(data){
-				if(data){
-					$that.closest('.comment-box').fadeOut('slow');
-					$that.closest('.comment-box').prev().removeClass('hidden');
-					//Handlebars
-					var source = $("#post-template").html();
-					var template = Handlebars.compile(source);
-					$('.posts').html(template({blogPost : data}));
-					}
-				});
-			}
-		});
+			$.get('/add-comment', commentData);
+		}
+	});
 
-		////
-		//render author pages
-		////
-		$(document).on('click', '.author-link', function(e){
-			e.preventDefault();
-			authorUrl = $('a', this).attr('href');
-			$.get(authorUrl, function(data){
-				console.log(data);
-				var source = $("#post-template").html();
-				var template = Handlebars.compile(source);
-				$('.posts').html(template({blogPost : data}));
-			});
-		});
-		
 });

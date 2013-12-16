@@ -50,6 +50,15 @@ time {
 	color:red;
 }
 
+.blog-post-title a{
+	color : black;
+}
+
+.blog-post-title a:hover{
+	color : red;
+	text-decoration: none;
+}
+
 /*admin blog post entry*/
 
 .blog-post-form-header {

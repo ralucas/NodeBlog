@@ -27,18 +27,21 @@ if ('development' == app.get('env')) {
 //create server
 var server = http.createServer(app);
 
+//author post routing
+
+
 //routes
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/admin', routes.admin);
-
-app.post('/blog-post', post.getNewPost);
 app.get('/render-post', post.renderPost);
 app.post('/delete-post', post.deletePost);
-app.post('/add-comment', post.getNewComment);
+app.get('/add-comment', post.getNewComment);
 
-//author post routing
+app.get('/posts/:id', post.getPost);
 app.get('/author/:authorName', post.getAuthorPosts);
+
+app.post('/blog-post', post.getNewPost);
 
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -35,7 +35,8 @@ exports.deletePost = function(req, res){
 };
 
 exports.getNewComment = function(req, res){
-	var commentData = req.body;
+	var commentData = req.query;
+	console.log(commentData);
 	var newCommentObj = {
 		name : commentData.name,
 		body : commentData.comment,
@@ -46,24 +47,31 @@ exports.getNewComment = function(req, res){
 		else{
 			blogPost.comments.unshift(newCommentObj);
 			blogPost.save();
-			setTimeout(function(){
-				BlogPost.find({}, null, { sort: {time:'desc'}}, function(err, updPosts){
-					if(err){console.error('ERROR');}
-					else{
-						res.send(updPosts);
-					}
-				})
-			},100);
+			console.log({commentArr: blogPost});
+			res.render('comments', {commentArr: blogPost});
+		}
+	});
+};
+
+exports.getPost = function (req, res){
+	var id = req.params.id;
+	BlogPost.findById(id, function(err, blogPost){
+		if(err){console.error('ERROR');}
+		else{
+			console.log('bp', blogPost);
+			res.render('posts', blogPost);
 		}
 	});
 };
 
 exports.getAuthorPosts = function(req, res){
 	var authorName = req.params.authorName;
+	console.log(authorName);
 	BlogPost.find({author : authorName}, function(err, blogPost){
 		if(err){console.error('ERROR');}
 		else{
-			res.send(blogPost);
+			//console.log(blogPost);
+			res.render('author', {author : blogPost});
 		}
 	});
 };

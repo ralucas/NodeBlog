@@ -1,8 +1,41 @@
 extends header
 
 block content
-	.container.author-posts
-		
-	include post.html
-
-	include footer
+	.container.author-post
+		- for(var x = 0; x < author.length; x++)
+			article.blog-post(data-id='#{author[x]._id}')
+				.tooltip
+					.tooltip-inner Tooltip!
+					.tooltip-arrow
+				i.glyphicon.glyphicon-remove-circle.ico-delete.pull-right(data-toggle="tooltip" title="Delete Post")
+				h1.blog-post-title #{author[x].title}
+				.blog-post-info
+					span.author-link By: <a rel="author" href="/author/#{author[x].author}">#{author[x].author}</a>
+					time Last Edited: #{author[x].time}
+				hr
+				p.blog-post-text!= author[x].post
+				button.btn.btn-xs.btn-primary.btn-addComment Add Comment
+				.hidden.comment-box
+					hr
+					form.comment-form(role="form")
+						input(type="hidden", value="#{author[x]._id}", name="_id")
+						.form-group
+							label(for="name") Name: 
+							input.form-control(name="name" type="text" placeholder="Enter Name")
+						.form-group
+							label(for="comment") Comment: 
+							textarea.form-control(cols=3, rows=3, name="comment", placeholder="Enter Comment")
+						.form-group
+							button.btn.btn-xs.btn-default.btn-submitComment(type='submit') Submit Comment
+							button.btn.btn-xs.btn-warning.btn-cancelComment.pull-right Cancel
+					hr
+				hr
+			.comments
+				if author[x].comments
+					p.lead Comments
+					- for (var i = 0; i < author[x].comments.length; i++)
+						.comment-info
+							span By: #{author[x].comments[i].name}
+							time Time: #{author[x].comments[i].time}
+						p= author[x].comments[i].body
+						hr
