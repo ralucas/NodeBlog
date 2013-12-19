@@ -45,8 +45,13 @@ exports.getNewComment = function(req, res){
 		if(err){console.error('ERROR');}
 		else{
 			blogPost.comments.unshift(newCommentObj);
-			blogPost.save();
-			res.render('comments', {commentArr: blogPost});
+			blogPost.save(function(err, blogPost){
+				if(err){console.error('ERROR!');}
+				else{
+					console.log({commentObj: blogPost});
+					res.render('comments', blogPost);
+				}
+			});
 		}
 	});
 };

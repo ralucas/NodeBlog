@@ -95,9 +95,11 @@ $(function(){
 			$(this).find('textarea').val('');
 			$that.closest('.comment-box').addClass('hidden');
 			$that.closest('.comment-box').prev().removeClass('hidden');
-			//ajax post sending which id to add comment to
-			//then adds comment to post-comment-area
-			$.get('/add-comment', commentData);
+			//ajax get sending which id to add comment to
+			//then re-renders comment area
+			$.get('/add-comment', commentData, function(data){
+				$that.closest('article').find('.comments').html(data);
+			});
 		}
 	});
 
