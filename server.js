@@ -27,9 +27,6 @@ if ('development' == app.get('env')) {
 //create server
 var server = http.createServer(app);
 
-//author post routing
-
-
 //routes
 app.get('/', routes.index);
 app.get('/users', user.list);

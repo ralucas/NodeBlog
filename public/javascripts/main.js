@@ -1,15 +1,15 @@
 $(function(){
 	
-	////
-	//creating a new post
-	////
+	/**
+	* Creating a new post
+	*/
 
 	//get new blog post from admin add post
 	$("#blog-post-form").on('submit', function(e){
 		e.preventDefault();
 		var blogPostData = $(this).serialize();
 		var blogPostArray  = $(this).serializeArray();
-		console.log(blogPostArray);
+
 		//escaping html tags
 		var escText = escape(blogPostData);
 		if(escText){
@@ -19,20 +19,19 @@ $(function(){
 		var entry = parseText(blogPostData);
 		//making sure the form is filled
 		var formIsFilled = validateForText(blogPostArray);
+
 		if(formIsFilled && !escText) {
-			$(this).find('input').val('');
-			$(this).find('textarea').val('');
-			$(this).find('.alert-success').removeClass('hidden').fadeIn();
+			// $(this).find('input').val('');
+			// $(this).find('textarea').val('');
+			// $(this).find('.alert-success').removeClass('hidden').fadeIn();
 			//ajax post blog-post data to server
-			$.post('/blog-post', entry, function(data){
-				console.log(data);
-			});
+			$.post('/blog-post', entry);
 		}
 	});
 
-	////
-	//render new blog posts on '/' home page
-	////
+	/**
+	* Render new blog posts on '/' home page
+	*/
 
 	$.get('/render-post', function(data){
 		//Handlebars
@@ -41,9 +40,9 @@ $(function(){
 		$('.posts').html(template({blogPost : data}));
 	});
 
-	////
-	//delete a post
-	////
+	/**
+	* Delete a post
+	*/
 
 	//show tooltip on delete icon
 	$(document).on('mouseover', ".ico-delete", function(){
@@ -63,9 +62,9 @@ $(function(){
 		});
 	});
 
-	////
-	//add a comment
-	////
+	/**
+	* Add a comment
+	*/
 
 	//show the comment box
 	$(document).on('click', '.btn-addComment', function(){
@@ -87,6 +86,7 @@ $(function(){
 		var $that = $(this);
 		var commentData = $(this).serialize();
 		var commentDataArray = $(this).serializeArray();
+		console.log(commentDataArray);
 
 		var formIsFilled = validateForText(commentDataArray);
 

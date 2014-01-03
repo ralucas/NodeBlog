@@ -17,6 +17,12 @@ Find the blog here:
 * Handlebars.js
 * MongoDB with Mongoose
 
+#####How to install
+
+1. Clone this repository
+2. `npm install`
+3. Host on Heroku or Amazon or something like that.
+
 Screenshot
 -----------
 ![Full](/public/img/Screenshot_nodeblog.png)

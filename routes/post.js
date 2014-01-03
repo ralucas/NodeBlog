@@ -2,7 +2,7 @@ var moment = require('moment');
 var BlogPost = require('./../models/blog-model');
 
 //functions
-exports.getNewPost = function (req,res){
+exports.getNewPost = function(req, res) {
 	var author = req.body.author;
 	var title = req.body.title;
 	var post = req.body.post;
@@ -13,6 +13,7 @@ exports.getNewPost = function (req,res){
 		post : post
 	});
 	blogPost.save();
+	res.redirect('http://localhost:3000');
 };
 
 exports.renderPost = function(req, res){
