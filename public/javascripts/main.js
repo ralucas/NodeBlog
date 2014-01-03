@@ -21,9 +21,9 @@ $(function(){
 		var formIsFilled = validateForText(blogPostArray);
 
 		if(formIsFilled && !escText) {
-			// $(this).find('input').val('');
-			// $(this).find('textarea').val('');
-			// $(this).find('.alert-success').removeClass('hidden').fadeIn();
+			$(this).find('input').val('');
+			$(this).find('textarea').val('');
+			$(this).find('.alert-success').removeClass('hidden').fadeIn();
 			//ajax post blog-post data to server
 			$.post('/blog-post', entry);
 		}

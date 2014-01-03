@@ -1,6 +1,5 @@
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var post = require('./routes/post');
 var http = require('http');
 var path = require('path');
@@ -29,7 +28,6 @@ var server = http.createServer(app);
 
 //routes
 app.get('/', routes.index);
-app.get('/users', user.list);
 app.get('/admin', routes.admin);
 app.get('/render-post', post.renderPost);
 app.post('/delete-post', post.deletePost);
