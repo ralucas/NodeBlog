@@ -5,29 +5,33 @@ $(function(){
 	*/
 
 	//get new blog post from admin add post
-	$("#blog-post-form").on('submit', function(e){
-		e.preventDefault();
-		var blogPostData = $(this).serialize();
-		var blogPostArray  = $(this).serializeArray();
+	// $("#blog-post-form").on('submit', function(e){
+	// 	//e.preventDefault();
+	// 	var blogPostData = $(this).serialize();
+	// 	var blogPostArray  = $(this).serializeArray();
 
-		//escaping html tags
-		var escText = escape(blogPostData);
-		if(escText){
-			alert('No HTML Tags Please!  Thank you.');
-		}
-		//adding any linebreaks
-		var entry = parseText(blogPostData);
-		//making sure the form is filled
-		var formIsFilled = validateForText(blogPostArray);
+	// 	//escaping html tags
+	// 	var escText = escape(blogPostData);
+	// 	if(escText){
+	// 		alert('No HTML Tags Please!  Thank you.');
+	// 	}
+	// 	//adding any linebreaks
+	// 	var entry = parseText(blogPostData);
+	// 	//making sure the form is filled
+	// 	var formIsFilled = validateForText(blogPostArray);
 
-		if(formIsFilled && !escText) {
-			$(this).find('input').val('');
-			$(this).find('textarea').val('');
-			$(this).find('.alert-success').removeClass('hidden').fadeIn();
-			//ajax post blog-post data to server
-			$.post('/blog-post', entry);
-		}
-	});
+	// 	// if(formIsFilled && !escText) {
+	// 	// 	$(this).find('input').val('');
+	// 	// 	$(this).find('textarea').val('');
+	// 	// 	$(this).find('.alert-success').removeClass('hidden').fadeIn();
+	// 		//ajax post blog-post data to server
+	// 		//$.post('/blog-post', entry);
+	// 		// , function(data){
+	// 		// 	console.log(data);
+	// 		// });
+	// 	//}
+
+	// });
 
 	/**
 	* Render new blog posts on '/' home page

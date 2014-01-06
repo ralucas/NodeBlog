@@ -1,23 +1,26 @@
 var moment = require('moment');
 var BlogPost = require('./../models/blog-model');
+var Q = require('q');
 
 var post = {
 	// On click on of new post
 	getNewPost: function(req, res) {
-		var author = req.body.author;
-		var title = req.body.title;
-		var post = req.body.post;
-		var blogPost = new BlogPost({
-			author : author,
-			time : moment().zone(420).format('MMMM Do YYYY, h:mm:ss a'),
-			title : title,
-			post : post
-		});
-		blogPost.save();
+		console.log('rb',req.body);
+		var author = req.body.author,
+			title = req.body.title,
+			post = req.body.post,
+			blogPost = new BlogPost({
+				author : author,
+				time : moment().zone(420).format('MMMM Do YYYY, h:mm:ss a'),
+				title : title,
+				post : post
+			});
+		Q(blogPost.save()).then(
+			res.redirect('../'));
 	},
 	// Sends all the blog posts, sorted by time in descending order to template
 	renderPost: function(req, res) {
-		BlogPost.find({}, null, { sort: {time:'asc'}}, function (err, blogPost){
+		BlogPost.find({}, null, { sort: {time:'desc'}}, function (err, blogPost){
 			if(err){console.error('ERROR');}
 			else{
 				res.send(blogPost);

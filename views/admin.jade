@@ -3,7 +3,7 @@ extends header
 block content
 	.container.form-container
 		h1.blog-post-form-header Enter a Blog Post
-		form#blog-post-form.row.col-xs-8.col-xs-offset-2.form-horizontal(role="form")
+		form#blog-post-form.row.col-xs-8.col-xs-offset-2.form-horizontal(role="form" method="post" action="/blog-post" enctype="application/json")
 			.form-group
 				label(for="author") Author:
 				input.form-control(type="text" placeholder="Your Name" name="author")
